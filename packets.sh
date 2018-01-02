@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#script para instalar tudo que é útil para a utilização do linux após instalação do SO
+# Criado em: 14/fev/2017
+# Modificado em: 02/jan/2018
+# Script criado para ajudar na instalação de ferramentas úteis
 
 #################################################################################################################################
 #																#
@@ -16,9 +18,10 @@ DESTDIR=${DESTDIR:-$(pwd)}
 verificaYAD(){
 	programa=$(which yad)
 	if [ "$programa" != "/usr/bin/yad" ];then
+		apt-get update
 		apt-get install yad
 	else
-		yad --text=" YAD ja instalado. Clique em OK " --width="90" --height="70"
+		yad --text=" YAD já instalado. Clique em OK " --width="90" --height="70"
 	fi
 }
 
@@ -43,8 +46,9 @@ main(){
 	9 - Vim
 	10 - VLC
 	11 - Whatsapp
-	12 - Instalar tudo
-	13 - Cancelar
+	12 - JDK
+	13 - Instalar tudo
+	14 - Cancelar
 "
 )
 	tratativa
@@ -62,70 +66,64 @@ tratativa(){
 
 escolhas(){
 	case $1 in
+		# Atualiza sistema
 	
 		"1")
 			opcao_1
 		;;
 
+		# Atom
 		"2")
 			opcao_2
 		;;
 
+		# Chrome
 		"3")
 			opcao_3
 		;;
-
+		# Dropbox
 		"4")
 			opcao_4
 		;;
-		
+		# Opera
 		"5")
 			opcao_5
 		;;
-
+		# Spotify
 		"6")
 			opcao_6
 		;;
-
+		# Telegram
 		"7")
 			opcao_7
 		;;
-
+		# Virtualbox
 		"8")
 			opcao_8
 		;;
-
+		# Vim
 		"9")
 			opcao_9
 		;;
-
+		# VLC
 		"10")
 			opcao_10
 		;;
-
+		# Whatsapp
 		"11")
 			opcao_11
 		;;
-		
+		# Eclipse
 		"12")
 			opcao_12
 		;;
-
+		# Faz a instalação de todos os pacotes
 		"13")
-			clear
-			echo -n Voce realmente deseja sair? [y/n] ; read opcao
-			while [ $opcao != "y" ] && [ $opcao != "n" ]
-			do
-				clear
-				echo -n Voce realmente deseja sair? [Y/n] ; read opcao
-			done
-				if [ $opcao = "n" ]
-				then
-					main
-				elif [ $opcao = "y" ]
-				then
-					exit
-				fi
+			opcao_13
+		;;
+		# Sair
+		"14")
+			exit
 		;;
 	esac
 }
@@ -135,7 +133,7 @@ opcao_1(){
 	apt-get update
 	apt-get upgrade -f -y
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_2 1
 	else
 		main
@@ -149,7 +147,7 @@ opcao_2(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_3 1
 	else
 		main
@@ -163,7 +161,7 @@ opcao_3(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_4 1
 	else
 		main
@@ -177,7 +175,7 @@ opcao_4(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_5 1
 	else
 		main
@@ -193,7 +191,7 @@ opcao_5(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_6 1
 	else
 		main
@@ -209,7 +207,7 @@ opcao_6(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_7 1
 	else
 		main
@@ -226,7 +224,7 @@ opcao_7(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_8 1
 	else
 		main
@@ -235,12 +233,12 @@ opcao_7(){
 
 opcao_8(){
 	echo Baixando e instalando virtualbox
-	wget download.virtualbox.org/virtualbox/5.1.14/virtualbox-5.1_5.1.14-112924~Debian~jessie_amd64.deb -O "${DESTDIR}"/virtualbox
+	wget http://download.virtualbox.org/virtualbox/5.2.4/virtualbox-5.2_5.2.4-119785~Debian~jessie_amd64.deb -O "${DESTDIR}"/virtualbox
 	dpkg -i virtualbox
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_9 1
 	else
 		main
@@ -254,7 +252,7 @@ opcao_9(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_10 1
 	else
 		main
@@ -262,13 +260,13 @@ opcao_9(){
 
 }
 
-opcao_10(){
+opcao_10(){ 
 	echo Baixando e instalando VLC
 	apt-get install vlc -f -y
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Iniciando proxima instalacao"
+		echo "Iniciando proxima instalação"
 		opcao_11 1
 	else
 		main
@@ -283,7 +281,7 @@ opcao_11(){
 	clear
 	echo Instalacao concluida!
 	if [ $1 -eq 1 ];then
-		echo "Instalacoes concluidas"
+		opcao_12
 	else
 		main
 	fi
@@ -291,21 +289,21 @@ opcao_11(){
 }	
 
 opcao_12(){
+	echo "Instalando JDK"
+	apt-get install software-properties-common
+	add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+	apt-get update
+	apt-get install oracle-java8-installer
+	
+	if [ $1 -eq 1 ];then
+		echo "Instalações concluidas"
+	else
+		main
+	fi
+}
 
+opcao_13(){
 	opcao_1 1
-	echo -n Voce deseja ficar com os pacotes em sua maquina? [y/n] ; read opcao
-	while [ $opcao != "y" ] && [ $opcao != "n" ]
-		do
-			clear
-			echo -n Os pacotes podem ser removidos? [y/n] ; read opcao
-		done
-			if [ $opcao = "y" ]
-			then
-				rm "${DESTDIR}"/atom; rm "${DESTDIR}"/chrome; rm "${DESTDIR}"/dropbox; rm "${DESTDIR}"/opera; rm "${DESTDIR}"/telegram; rm "${DESTDIR}"/virtualbox; rm "${DESTDIR}"/whatsie
-			elif [ $opcao = "n" ]
-			then
-				exit
-			fi
 }
 
 ROT=$(id -u)
@@ -314,6 +312,6 @@ if [ "$ROT" == "0" ];then
 		verificaYAD
 		main
 	else
-		echo "HEY!Acesso apenas para root"
+		echo "HEY! Acesso apenas para root"
 		exit
 	fi
