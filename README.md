@@ -1,6 +1,6 @@
-# Inicializacao_linux
+# Pacotes úteis
 
-Script feito em shell para instalar pacotes úteis após instalação do S.O;
+Script feito em shell para instalar pacotes úteis no Linux
 
 O script tem disponível os pacotes:
   
@@ -14,3 +14,4 @@ O script tem disponível os pacotes:
 * Vim
 * Vlc
 * Whatsapp
+* JDK
